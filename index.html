@@ -1,0 +1,2562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader Bay - Swap, Trade & Gift Safely</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            /* Brand system */
+            --primary: #2563EB; /* Ocean Blue */
+            --secondary: #7C3AED; /* Sea Violet */
+            --accent: #F97316; /* Sunset highlight */
+            --swap: #EF4444;
+            --trade: #06B6D4;
+            --gift: #10B981;
+            --bg: #F6F8FC;
+            --card-bg: #FFFFFF;
+            --text: #0F172A;
+            --text-light: #64748B;
+            --border: #E2E8F0;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 18px 48px rgba(15, 23, 42, 0.12);
+            --glass: rgba(255, 255, 255, 0.18);
+        }
+
+        body {
+            font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+            min-width: 200px;
+        }
+
+        .brand img {
+            height: 36px;
+            width: auto;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .brand-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .brand-tagline {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: block;
+        }
+
+        .search-bar {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 24px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--text);
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .account-select {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3.5rem 1rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.16), transparent 35%),
+                        radial-gradient(circle at 80% 0%, rgba(255,255,255,0.16), transparent 30%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-card {
+            background: rgba(255,255,255,0.16);
+            border: 1px solid rgba(255,255,255,0.28);
+            backdrop-filter: blur(18px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .mode-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto 1.25rem;
+        }
+
+        .mode-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 1.25rem;
+            border: 2px solid rgba(255,255,255,0.35);
+            border-radius: 16px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .mode-btn:hover {
+            background: rgba(255,255,255,0.18);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        .mode-btn.active[data-mode="swap"] {
+            background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.35));
+            color: white;
+            border-color: rgba(239,68,68,0.35);
+            box-shadow: 0 12px 32px rgba(239, 68, 68, 0.25);
+        }
+
+        .mode-btn.active[data-mode="trade"] {
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(6,182,212,0.35));
+            color: white;
+            border-color: rgba(6,182,212,0.35);
+            box-shadow: 0 12px 32px rgba(6, 182, 212, 0.25);
+        }
+
+        .mode-btn.active[data-mode="gift"] {
+            background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.35));
+            color: white;
+            border-color: rgba(16,185,129,0.35);
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.25);
+        }
+
+        .mode-btn.active[data-mode="all"] {
+            background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(124,58,237,0.24));
+            color: white;
+            border-color: rgba(37,99,235,0.35);
+            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.25);
+        }
+
+        .mode-btn .icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+
+        .trust-bullets {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .trust-bullet {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.28);
+            border-radius: 999px;
+            padding: 0.65rem 1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            backdrop-filter: blur(8px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Filters */
+        .filters {
+            background: var(--card-bg);
+            padding: 1.75rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .active-chips {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .active-chip {
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--primary);
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .active-chip button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: inherit;
+            font-weight: 700;
+            padding: 0;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        /* Listings Grid */
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .listing-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: var(--shadow-lg);
+            filter: saturate(1.03);
+        }
+
+        .listing-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-blend-mode: multiply;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .listing-emoji {
+            background: rgba(0,0,0,0.32);
+            padding: 0.4rem 0.6rem;
+            border-radius: 12px;
+            font-size: 1.6rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .detail-visual {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 16px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-blend-mode: multiply;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .listing-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .badge-swap { background: var(--swap); }
+        .badge-trade { background: var(--trade); }
+        .badge-gift { background: var(--gift); }
+
+        .quick-actions {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            display: flex;
+            gap: 0.4rem;
+            opacity: 0;
+            transform: translateY(-6px);
+            transition: all 0.2s ease;
+        }
+
+        .listing-card:hover .quick-actions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quick-action {
+            background: rgba(255,255,255,0.9);
+            border-radius: 999px;
+            padding: 0.35rem 0.6rem;
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .listing-content {
+            padding: 1.35rem;
+        }
+
+        .listing-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .listing-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .listing-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .listing-location {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .listing-condition {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .chips {
+            display: flex;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .chip {
+            background: var(--bg);
+            border-radius: 999px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .chip.delivery {
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--primary);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .user-trust {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .trust-stars {
+            color: var(--warning);
+            font-size: 0.9rem;
+        }
+
+        .trust-count {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-14px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 2.25rem;
+            border-bottom: 2px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            line-height: 1;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .modal-tab {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .modal-tab.active {
+            background: rgba(37, 99, 235, 0.1);
+            border-color: rgba(37, 99, 235, 0.4);
+            color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #1D4ED8);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1E3A8A, var(--primary));
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #45a817;
+        }
+
+        .btn-outline {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn.loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        .btn.loading::after {
+            content: "";
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.6);
+            border-top-color: white;
+            animation: spin 0.9s linear infinite;
+            display: inline-block;
+            margin-left: 0.35rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-hint {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
+        /* Safety Warning */
+        .safety-warning {
+            background: #FFF4E6;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .safety-warning-title {
+            font-weight: 600;
+            color: var(--warning);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .safety-warning-text {
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        /* Trust Panel */
+        .trust-panel {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .trust-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .trust-score {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+        }
+
+        /* Mobile Bottom Nav */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+            padding: 0.75rem 0;
+            z-index: 100;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 0.75rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav-btn.active {
+            color: var(--primary);
+        }
+
+        .mobile-nav-btn .icon {
+            font-size: 1.5rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-state .icon {
+            font-size: 4rem;
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        /* Education additions */
+        .positioning-note {
+            margin: 0 auto 0.75rem;
+            max-width: 680px;
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        .cta-inline {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .cta-microcopy {
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .edu-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .edu-section h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .edu-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .edu-item {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            background: var(--bg);
+        }
+
+        .edu-item summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text);
+            list-style: none;
+        }
+
+        .edu-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .edu-item p {
+            margin-top: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .trust-strip {
+            margin-top: 2rem;
+            padding: 1rem 1.25rem;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .trust-pill {
+            padding: 0.45rem 0.9rem;
+            background: var(--bg);
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .education-placeholder {
+            margin-top: 2rem;
+            padding: 1.25rem 1.5rem;
+            border-radius: 14px;
+            border: 1px dashed var(--border);
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+
+        .ai-support {
+            margin-top: 1.25rem;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .policy-links {
+            margin: 0.5rem auto 0;
+            max-width: 1200px;
+            padding: 0 1rem 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .policy-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .policy-links a:hover {
+            text-decoration: underline;
+        }
+
+        .policy-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.1rem;
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+
+        .policy-card h4 {
+            margin-bottom: 0.35rem;
+            font-size: 1rem;
+        }
+
+        .policy-card p, .policy-card ul {
+            color: var(--text-light);
+            font-size: 0.93rem;
+            line-height: 1.55;
+        }
+
+        .policy-card ul {
+            padding-left: 1.1rem;
+            margin: 0.35rem 0 0;
+        }
+
+        .section-block {
+            margin-top: 2.25rem;
+        }
+
+        .footer {
+            margin-top: 2.5rem;
+            padding: 1.25rem 0 2rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Messages */
+        .message-thread {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+
+        .message {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+            max-width: 80%;
+        }
+
+        .message-sent {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+        }
+
+        .message-received {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .message-system {
+            background: #FFF4E6;
+            color: var(--text);
+            text-align: center;
+            font-size: 0.85rem;
+            max-width: 100%;
+        }
+
+        .pinned-banner {
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px dashed rgba(37, 99, 235, 0.35);
+            color: var(--primary);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .quick-messages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .supervision-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg);
+            border: 1px dashed var(--border);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .supervision-toggle input {
+            accent-color: var(--primary);
+        }
+
+        .approval-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.25);
+            color: var(--primary);
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        .quick-msg-btn {
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-msg-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        @media (hover: hover) {
+            .quick-actions {
+                opacity: 0;
+            }
+        }
+
+        /* Status Chips */
+        .status-chip {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-available { background: #E6F7FF; color: var(--primary); }
+        .status-pending { background: #FFF7E6; color: var(--warning); }
+        .status-agreed { background: #E6FFE6; color: var(--success); }
+        .status-completed { background: #F0F0F0; color: var(--text-light); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                gap: 1rem;
+            }
+
+            .brand img {
+                height: 30px;
+            }
+
+            .brand-tagline {
+                display: none;
+            }
+
+            .nav-buttons {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-card {
+                padding: 1.1rem;
+            }
+
+            .mode-btn {
+                min-width: 150px;
+            }
+
+            .listings-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+
+            .modal-content {
+                margin: 0;
+                border-radius: 16px 16px 0 0;
+            }
+
+            .quick-actions {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Jasmine's Rule */
+        .jasmine-rule {
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFE9F5 100%);
+            border: 2px solid #FF9ECE;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-style: italic;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .jasmine-rule::before {
+            content: "💭 Jasmine's Rule: ";
+            font-weight: 700;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <img src="Assets/logo.png" alt="Trader Bay logo">
+                <span class="brand-text">
+                    <span class="brand-title">Trader Bay</span>
+                    <span class="brand-tagline">Swap • Trade • Gift — safely</span>
+                </span>
+            </a>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for items...">
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn active" data-section="browse" onclick="showSection('browse', event)">Browse</button>
+                <button class="nav-btn" data-section="create" onclick="openModal('createListingModal')">Create Listing</button>
+                <button class="nav-btn" data-section="messages" onclick="openModal('messagesModal')">Messages <span style="background: var(--danger); color: white; padding: 0.25rem 0.5rem; border-radius: 10px; font-size: 0.75rem; margin-left: 0.25rem;">3</span></button>
+                <button class="nav-btn" data-section="profile" onclick="openModal('profileModal')">Profile</button>
+            </div>
+            <select class="account-select" id="accountType">
+                <option value="adult">Adult Account</option>
+                <option value="teen">Teen Account (13-17)</option>
+                <option value="kid">Kid Account (Under 13)</option>
+                <option value="parent">Parent/Guardian</option>
+            </select>
+        </div>
+        <div class="policy-links">
+            <a href="#policies" class="anchor-link">Policies</a>
+            <a href="#education" class="anchor-link">Education</a>
+            <a href="#trust" class="anchor-link">Trust</a>
+            <a href="#contact" class="anchor-link">Contact</a>
+            <a href="#safety" class="anchor-link">Safety</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Swap, Trade & Gift Safely</h1>
+            <div class="positioning-note">This space is here to teach you how it works — you learn first, then make your swaps, trades, or gifts safely inside Trader Bay.</div>
+            <p>A friendly marketplace where kids, teens, and adults can swap items, trade fairly, or gift to those who need it</p>
+            <div class="hero-card">
+                <div class="mode-buttons">
+                    <button class="mode-btn active" data-mode="all" onclick="filterByMode('all')">
+                        <span class="icon">🌟</span>
+                        <div>All Items</div>
+                    </button>
+                    <button class="mode-btn" data-mode="swap" onclick="filterByMode('swap')">
+                        <span class="icon">↔️</span>
+                        <div>Swap It</div>
+                    </button>
+                    <button class="mode-btn" data-mode="trade" onclick="filterByMode('trade')">
+                        <span class="icon">⇄</span>
+                        <div>Trade It</div>
+                    </button>
+                    <button class="mode-btn" data-mode="gift" onclick="filterByMode('gift')">
+                        <span class="icon">🎁</span>
+                        <div>Gift It</div>
+                    </button>
+                </div>
+                <div class="trust-bullets">
+                    <span class="trust-bullet">No personal info in chat</span>
+                    <span class="trust-bullet">Double-confirm trades</span>
+                    <span class="trust-bullet">Report & block instantly</span>
+                </div>
+                <div class="cta-inline">
+                    <a class="btn btn-outline" href="#safety">Read safety guide</a>
+                    <span class="cta-microcopy">Trading happens here with clear rules and education before any exchange.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filters-header">
+                <h3 style="font-size:1.1rem; font-weight:700; color: var(--text);">Filters</h3>
+                <button class="btn btn-outline" id="resetFilters">Reset filters</button>
+            </div>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Category</label>
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="toys">Toys</option>
+                        <option value="books">Books</option>
+                        <option value="games">Game Items</option>
+                        <option value="clothes">Clothes</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="collectibles">Collectibles</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Item Type</label>
+                    <select id="typeFilter">
+                        <option value="all">Physical & Digital</option>
+                        <option value="physical">Physical Only</option>
+                        <option value="digital">Digital Only</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Location</label>
+                    <select id="locationFilter">
+                        <option value="all">All Locations</option>
+                        <option value="london">London</option>
+                        <option value="manchester">Manchester</option>
+                        <option value="birmingham">Birmingham</option>
+                        <option value="leeds">Leeds</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Condition</label>
+                    <select id="conditionFilter">
+                        <option value="all">Any Condition</option>
+                        <option value="new">New</option>
+                        <option value="great">Great</option>
+                        <option value="good">Good</option>
+                        <option value="used">Used</option>
+                    </select>
+                </div>
+            </div>
+            <div class="active-chips" id="activeChips"></div>
+        </div>
+
+        <!-- Listings Grid -->
+        <div id="listingsGrid" class="listings-grid"></div>
+
+        <div class="edu-section">
+            <h2>Understanding the Ingredients</h2>
+            <div class="edu-accordion">
+                <details class="edu-item">
+                    <summary>What Kanna (Sceletium tortuosum) is</summary>
+                    <p>Kanna is a South African succulent traditionally chewed or brewed as tea for calm focus and social ease. Here we use it as an educational example to explore sourcing, preparation, and thoughtful use.</p>
+                </details>
+                <details class="edu-item">
+                    <summary>How Kanna differs from common alternatives</summary>
+                    <p>Unlike caffeine or stimulant blends, Kanna is not used for jolts or spikes. It is discussed alongside adaptogens to highlight how it may pair with routines focused on steadiness rather than short bursts.</p>
+                </details>
+                <details class="edu-item">
+                    <summary>Safety, sourcing, and quality considerations</summary>
+                    <p>Quality hinges on origin, careful drying, and verified purity. We focus on transparent sourcing, third-party testing, and clear labels so you know exactly what is inside before choosing to buy.</p>
+                </details>
+                <details class="edu-item">
+                    <summary>What this product does NOT claim to do</summary>
+                    <p>It is not a cure, treatment, or medical solution, and it is not a stimulant for instant energy. We avoid promising outcomes and instead provide information so you can make informed decisions with your own healthcare guidance.</p>
+                </details>
+            </div>
+        </div>
+
+        <div id="trust" class="trust-strip">
+            <span class="trust-pill">Manufactured in the USA</span>
+            <span class="trust-pill">Third-party tested</span>
+            <span class="trust-pill">Amazon-verified fulfilment</span>
+            <span class="trust-pill">Transparent ingredient sourcing</span>
+            <span class="trust-pill">No artificial fillers</span>
+        </div>
+
+        <div id="education" class="education-placeholder">
+            <h3 style="margin-bottom:0.5rem;">Education & Research</h3>
+            <p style="color: var(--text-light);">Long-form articles on ingredients, sourcing ethics, and product science will live here. We’re preparing structured guides so you can learn deeply before deciding to purchase on Amazon.</p>
+        </div>
+
+        <div class="ai-support">
+            <div style="font-weight:700; color: var(--text);">Need answers fast?</div>
+            <div style="color: var(--text-light);">An instant assistant is available to help with ingredient and product questions so you can learn first, then proceed safely.</div>
+        </div>
+    </div>
+
+    <div class="container section-block">
+        <div class="edu-section" id="policies">
+            <h2>Trust, Safety & Policies</h2>
+            <div class="education-placeholder" id="safety" style="margin-top:0; margin-bottom:1.25rem;">
+                <h3 style="margin-bottom:0.35rem;">Safety Guide (Quick)</h3>
+                <p style="color: var(--text-light);">Stay in-app, keep personal info private, and double-confirm details before exchanging items. Meet in public with an adult when needed, use report/block if anything feels off, and capture proof for disputes. Digital transfers should be verified and recorded in-app; physical exchanges should be photographed and inspected together.</p>
+            </div>
+            <div class="policy-grid">
+                <div class="policy-card">
+                    <h4>Terms of Service</h4>
+                    <p>Outlines how to use Trader Bay, account rules, and acceptable conduct. No unauthorized commerce, harassment, or misuse of messaging.</p>
+                </div>
+                <div class="policy-card">
+                    <h4>Age & Parental Guidance</h4>
+                    <p>Kid accounts are adult-supervised with quick messages by default. Teens and adults must still avoid sharing personal info. Parents can review and approve actions.</p>
+                </div>
+                <div class="policy-card">
+                    <h4>Privacy & Data</h4>
+                    <p>Explains what we collect (account basics, usage signals), why (safety, experience), and your controls for data access or deletion.</p>
+                </div>
+                <div class="policy-card">
+                    <h4>Cookies & Preferences</h4>
+                    <p>Details functional cookies, preference storage, and how to adjust settings. No ad networks or hidden trackers.</p>
+                </div>
+                <div class="policy-card">
+                    <h4>Community Guidelines</h4>
+                    <p>Be respectful, stay on-topic, and keep personal info out of chat. Zero tolerance for bullying, discrimination, or unsafe meetups.</p>
+                </div>
+                <div class="policy-card">
+                    <h4>Prohibited Items</h4>
+                    <ul>
+                        <li>Illegal, dangerous, or age-restricted items</li>
+                        <li>Counterfeits or IP-infringing goods</li>
+                        <li>Weapons, adult content, controlled substances</li>
+                    </ul>
+                </div>
+                <div class="policy-card">
+                    <h4>Returns & Disputes</h4>
+                    <p>For trades/swaps, double-confirm before exchange. For issues: document, report, and pause the exchange; we mediate and can block or remove users.</p>
+                </div>
+                <div class="policy-card" id="safety-card">
+                    <h4>Safety & Reporting</h4>
+                    <p>Use in-app report/block. Meet in public with an adult when needed. No phone numbers or addresses in chat. Moderation escalates repeat offenses.</p>
+                </div>
+                <div class="policy-card">
+                    <h4>Digital vs Physical</h4>
+                    <p>Digital items: verify transfer method first. Physical items: verify condition photos and meet safely. Gifting still follows the same safety rules.</p>
+                </div>
+                <div class="policy-card">
+                    <h4>Accessibility</h4>
+                    <p>Committed to inclusive access; if you encounter barriers, contact support and we’ll prioritize fixes.</p>
+                </div>
+                <div class="policy-card">
+                    <h4 id="contact">Contact & Support</h4>
+                    <p>Email support: <strong>support@traderbay.example</strong> (placeholder). In-app help is available for questions, safety flags, or account concerns.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="trust" class="trust-strip">
+            <span class="trust-pill">Moderated community standards</span>
+            <span class="trust-pill">No personal info in chat</span>
+            <span class="trust-pill">Transparent sourcing for digital and physical items</span>
+            <span class="trust-pill">Report & block built-in</span>
+            <span class="trust-pill">No artificial fillers / No counterfeits</span>
+        </div>
+
+        <div id="education" class="education-placeholder">
+            <h3 style="margin-bottom:0.5rem;">Education & Research</h3>
+            <p style="color: var(--text-light);">Long-form guides on trading safely, sourcing ethics, digital transfer steps, and community standards will live here. We’re structuring this space so you can learn deeply before any exchange.</p>
+        </div>
+
+        <div class="ai-support">
+            <div style="font-weight:700; color: var(--text);">Need answers fast?</div>
+            <div style="color: var(--text-light);">An instant assistant is available to help with trade, swap, and gifting questions so you can learn first, then decide how to proceed safely.</div>
+        </div>
+    </div>
+
+    <div class="container footer">
+        <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+            <span>© 2025 Trader Bay</span>
+            <span>|</span>
+            <span>Terms of Service</span>
+            <span>|</span>
+            <span>Privacy</span>
+            <span>|</span>
+            <span>Community Guidelines</span>
+            <span>|</span>
+            <span>Safety & Reporting</span>
+            <span>|</span>
+            <span>Contact</span>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-items">
+            <button class="mobile-nav-btn active">
+                <span class="icon">🏠</span>
+                <span>Browse</span>
+            </button>
+            <button class="mobile-nav-btn" onclick="openModal('createListingModal')">
+                <span class="icon">➕</span>
+                <span>Create</span>
+            </button>
+            <button class="mobile-nav-btn" onclick="openModal('messagesModal')">
+                <span class="icon">💬</span>
+                <span>Messages</span>
+            </button>
+            <button class="mobile-nav-btn" onclick="openModal('profileModal')">
+                <span class="icon">👤</span>
+                <span>Profile</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Listing Detail Modal -->
+    <div id="listingDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('listingDetailModal')">&times;</button>
+                <h2 class="modal-title" id="detailTitle">Item Details</h2>
+            </div>
+            <div class="modal-body" id="detailBody">
+                <!-- Content loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Listing Modal -->
+    <div id="createListingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('createListingModal')">&times;</button>
+                <h2 class="modal-title">Create a Listing</h2>
+            </div>
+            <div class="modal-body">
+                <form id="createListingForm">
+                    <div class="form-group">
+                        <label>What are you listing?</label>
+                        <input type="text" required placeholder="e.g. Rare Pokémon Cards">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea required placeholder="Tell others about your item..."></textarea>
+                        <div class="form-hint">Be honest and detailed</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select required>
+                            <option value="">Choose a category</option>
+                            <option value="toys">Toys</option>
+                            <option value="books">Books</option>
+                            <option value="games">Game Items</option>
+                            <option value="clothes">Clothes</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="collectibles">Collectibles</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>What type of listing?</label>
+                        <select id="listingMode" required>
+                            <option value="swap">Swap - Trade item for item</option>
+                            <option value="trade">Trade - Trade for points</option>
+                            <option value="gift">Gift It - Give it away</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Item Type</label>
+                        <select id="itemType" required>
+                            <option value="physical">Physical Item</option>
+                            <option value="digital">Digital Item (Minecraft, Roblox, etc.)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="conditionGroup">
+                        <label>Condition</label>
+                        <select>
+                            <option value="new">New</option>
+                            <option value="great">Great</option>
+                            <option value="good">Good</option>
+                            <option value="used">Used</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location</label>
+                        <select required>
+                            <option value="london">London</option>
+                            <option value="manchester">Manchester</option>
+                            <option value="birmingham">Birmingham</option>
+                            <option value="leeds">Leeds</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Delivery Options</label>
+                        <select required>
+                            <option value="pickup">Pickup only (safe public place)</option>
+                            <option value="postage">Postage available (receiver pays)</option>
+                            <option value="either">Either pickup or postage</option>
+                        </select>
+                    </div>
+
+                    <div class="safety-warning">
+                        <div class="safety-warning-title">⚠️ Safety First</div>
+                        <div class="safety-warning-text">
+                            Never share personal contact details. For pickups, always meet in safe public places with a parent or guardian present.
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Create Listing</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messages Modal -->
+    <div id="messagesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('messagesModal')">&times;</button>
+                <h2 class="modal-title">Messages</h2>
+            </div>
+            <div class="modal-body">
+                <div class="message-thread">
+                    <h3 style="margin-bottom: 1rem;">Re: Pokémon Card Collection</h3>
+                    <div class="pinned-banner" id="messageSafetyBanner">🔒 No phone numbers / addresses</div>
+                    <div class="message message-received">
+                        Is this still available?
+                    </div>
+                    <div class="message message-sent">
+                        Yes! What would you like to swap for it?
+                    </div>
+                    <div class="message message-system">
+                        🔒 Reminder: Never share phone numbers or addresses in chat
+                    </div>
+                    <div class="message message-received">
+                        I have some Minecraft items - can we arrange a pickup?
+                    </div>
+
+                    <div class="safety-warning" style="margin-top: 1rem;">
+                        <div class="safety-warning-title">⚠️ Safe Messaging</div>
+                        <div class="safety-warning-text">
+                            Use quick messages or be careful with free text. No personal info!
+                        </div>
+                    </div>
+
+                    <div class="quick-messages">
+                        <button class="quick-msg-btn">Is this still available?</button>
+                        <button class="quick-msg-btn">Can you post it?</button>
+                        <button class="quick-msg-btn">I can collect on Saturday</button>
+                        <button class="quick-msg-btn">What would you swap for?</button>
+                    </div>
+
+                    <div id="quickOnlyBanner" class="safety-warning" style="display:none; margin-top:0;">
+                        <div class="safety-warning-title">👪 Quick messages only</div>
+                        <div class="safety-warning-text">Free text is disabled for Kid accounts. Use quick replies.</div>
+                    </div>
+
+                    <div id="parentToggleGroup" class="form-group" style="display:none;">
+                        <label class="supervision-toggle">
+                            <input type="checkbox" id="parentToggle">
+                            <span>Parent supervised (allow free text)</span>
+                        </label>
+                        <div class="form-hint">A parent/guardian can enable free text temporarily.</div>
+                    </div>
+
+                    <div id="messageInputGroup" class="form-group">
+                        <textarea id="messageBox" placeholder="Or type your message (no personal info!)..."></textarea>
+                    </div>
+                    <div id="messageApprovalBadge" class="approval-note" style="display:none; margin-bottom:0.75rem;">Parent approval required</div>
+                    <button class="btn btn-primary" id="sendMessageBtn">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('profileModal')">&times;</button>
+                <h2 class="modal-title">Your Profile</h2>
+            </div>
+            <div class="modal-body">
+                <div class="trust-panel">
+                    <div class="trust-header">
+                        <div>
+                            <h3>Trust Score</h3>
+                            <div class="trust-score">4.8 ⭐</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="color: var(--text-light); font-size: 0.9rem;">Based on</div>
+                            <div style="font-weight: 700; font-size: 1.25rem;">47 trades</div>
+                        </div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge">🤝 Fair Trader</span>
+                        <span class="badge">📦 Reliable Collector</span>
+                        <span class="badge">🎁 Giver</span>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0;">
+                    <div style="background: var(--bg); padding: 1.5rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--swap);">23</div>
+                        <div style="color: var(--text-light); margin-top: 0.5rem;">Swaps Completed</div>
+                    </div>
+                    <div style="background: var(--bg); padding: 1.5rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--trade);">18</div>
+                        <div style="color: var(--text-light); margin-top: 0.5rem;">Trades Made</div>
+                    </div>
+                    <div style="background: var(--bg); padding: 1.5rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--gift);">12</div>
+                        <div style="color: var(--text-light); margin-top: 0.5rem;">Gifts Given</div>
+                    </div>
+                    <div style="background: var(--bg); padding: 1.5rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--success);">98%</div>
+                        <div style="color: var(--text-light); margin-top: 0.5rem;">Completion Rate</div>
+                    </div>
+                </div>
+
+                <div class="jasmine-rule">
+                    If it doesn't feel fair, don't do it.
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1rem;">Your Active Listings</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div style="background: var(--bg); padding: 1rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: 600;">Pokémon Card Collection</div>
+                                <span class="status-chip status-available">Available</span>
+                            </div>
+                            <span class="listing-badge badge-swap">Swap</span>
+                        </div>
+                        <div style="background: var(--bg); padding: 1rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: 600;">Old LEGO Sets</div>
+                                <span class="status-chip status-pending">1 Offer Pending</span>
+                            </div>
+                            <span class="listing-badge badge-gift">Gift</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="approvalsPanel" style="display:none; margin-top: 2rem; background: var(--bg); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border);">
+                    <h3 style="margin-bottom: 0.5rem;">Approvals</h3>
+                    <p style="color: var(--text-light); margin-bottom: 0.75rem;">Pending kid requests (placeholder)</p>
+                    <ul style="padding-left: 1rem; color: var(--text); display: flex; flex-direction: column; gap: 0.35rem;">
+                        <li>Offer to swap LEGO - awaiting review</li>
+                        <li>Message request - approve?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offer Modal -->
+    <div id="offerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('offerModal')">&times;</button>
+                <h2 class="modal-title">Make an Offer</h2>
+            </div>
+            <div class="modal-body" id="offerBody">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample Data
+        const listings = [
+            {
+                id: 1,
+                title: "Pokémon Card Collection",
+                description: "Rare holographic cards including Charizard. Great condition, been in sleeves since day one.",
+                mode: "swap",
+                type: "physical",
+                category: "collectibles",
+                condition: "great",
+                location: "london",
+                image: "🎴",
+                imageSrc: "Assets/pokemon-cards.png",
+                delivery: "either",
+                trustScore: 4.8,
+                trades: 23,
+                badges: ["Fair Trader", "Reliable"]
+            },
+            {
+                id: 2,
+                title: "Minecraft Diamond Armor Set",
+                description: "Full enchanted diamond armor on Bedrock server. Level 4 Protection.",
+                mode: "trade",
+                type: "digital",
+                category: "games",
+                condition: "n/a",
+                location: "manchester",
+                image: "⚔️",
+                imageSrc: "Assets/minecraft-armor.png",
+                delivery: "postage",
+                trustScore: 4.9,
+                trades: 47,
+                badges: ["Fair Trader", "Giver"]
+            },
+            {
+                id: 3,
+                title: "Harry Potter Book Set",
+                description: "Complete series 1-7, paperback. A few creases but all readable. Perfect for a young reader!",
+                mode: "gift",
+                type: "physical",
+                category: "books",
+                condition: "good",
+                location: "birmingham",
+                image: "📚",
+                imageSrc: "Assets/harry-potter-books.png",
+                delivery: "pickup",
+                trustScore: 5.0,
+                trades: 12,
+                badges: ["Giver", "Reliable"]
+            },
+            {
+                id: 4,
+                title: "LEGO Star Wars Millennium Falcon",
+                description: "Complete set, all pieces included. Box slightly damaged but LEGO is perfect.",
+                mode: "swap",
+                type: "physical",
+                category: "toys",
+                condition: "great",
+                location: "london",
+                image: "🚀",
+                imageSrc: "Assets/lego-falcon.png",
+                delivery: "either",
+                trustScore: 4.7,
+                trades: 31,
+                badges: ["Fair Trader"]
+            },
+            {
+                id: 5,
+                title: "Roblox Limited Edition Items",
+                description: "Rare accessories and items. Can transfer through official Roblox trading.",
+                mode: "trade",
+                type: "digital",
+                category: "games",
+                condition: "n/a",
+                location: "leeds",
+                image: "🎮",
+                imageSrc: "Assets/roblox-items.png",
+                delivery: "postage",
+                trustScore: 4.6,
+                trades: 19,
+                badges: ["Fair Trader"]
+            },
+            {
+                id: 6,
+                title: "Science Experiment Kit",
+                description: "Barely used, only did 2 experiments. Includes all chemicals and equipment.",
+                mode: "gift",
+                type: "physical",
+                category: "toys",
+                condition: "great",
+                location: "manchester",
+                image: "🔬",
+                imageSrc: "Assets/science-kit.png",
+                delivery: "either",
+                trustScore: 4.9,
+                trades: 8,
+                badges: ["Giver", "Reliable"]
+            },
+            {
+                id: 7,
+                title: "Football Boots Size 5",
+                description: "Adidas Predator boots, outgrown them. Still loads of life left.",
+                mode: "swap",
+                type: "physical",
+                category: "clothes",
+                condition: "good",
+                location: "birmingham",
+                image: "⚽",
+                imageSrc: "Assets/football-boots.png",
+                delivery: "pickup",
+                trustScore: 4.5,
+                trades: 15,
+                badges: ["Reliable"]
+            },
+            {
+                id: 8,
+                title: "Vintage Gameboy with Games",
+                description: "Original Gameboy with 5 games. Still works perfectly! Comes with case.",
+                mode: "trade",
+                type: "physical",
+                category: "electronics",
+                condition: "used",
+                location: "london",
+                image: "🎮",
+                imageSrc: "Assets/vintage-gameboy.png",
+                delivery: "either",
+                trustScore: 4.8,
+                trades: 29,
+                badges: ["Fair Trader", "Reliable"]
+            },
+            {
+                id: 9,
+                title: "Art Supplies Bundle",
+                description: "Paints, brushes, canvases - everything a budding artist needs!",
+                mode: "gift",
+                type: "physical",
+                category: "toys",
+                condition: "new",
+                location: "leeds",
+                image: "🎨",
+                imageSrc: "Assets/art-supplies.png",
+                delivery: "postage",
+                trustScore: 5.0,
+                trades: 6,
+                badges: ["Giver"]
+            },
+            {
+                id: 10,
+                title: "Minecraft Build Plans",
+                description: "Custom castle and city blueprints I designed. Digital download.",
+                mode: "swap",
+                type: "digital",
+                category: "games",
+                condition: "n/a",
+                location: "manchester",
+                image: "🏰",
+                imageSrc: "Assets/minecraft-blueprints.png",
+                delivery: "either",
+                trustScore: 4.7,
+                trades: 22,
+                badges: ["Fair Trader"]
+            }
+        ];
+
+        const modeGradients = {
+            swap: 'linear-gradient(135deg, rgba(239,68,68,0.9), rgba(239,68,68,0.7))',
+            trade: 'linear-gradient(135deg, rgba(6,182,212,0.9), rgba(6,182,212,0.7))',
+            gift: 'linear-gradient(135deg, rgba(16,185,129,0.9), rgba(16,185,129,0.7))',
+            default: 'linear-gradient(135deg, rgba(37,99,235,0.9), rgba(124,58,237,0.7))'
+        };
+
+        const deliveryLabels = {
+            pickup: 'Pickup',
+            postage: 'Postage',
+            either: 'Either'
+        };
+
+        const focusableSelectors = 'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+        let filteredListings = [...listings];
+        let activeMode = 'all';
+        let currentListing = null;
+        let currentAccountType = 'adult';
+        let activeModal = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderListings();
+            setupEventListeners();
+            applyFilters();
+            applyAccountGating(document.getElementById('accountType').value);
+        });
+
+        function setupEventListeners() {
+            document.getElementById('searchInput').addEventListener('input', applyFilters);
+            document.getElementById('categoryFilter').addEventListener('change', applyFilters);
+            document.getElementById('typeFilter').addEventListener('change', applyFilters);
+            document.getElementById('locationFilter').addEventListener('change', applyFilters);
+            document.getElementById('conditionFilter').addEventListener('change', applyFilters);
+            document.getElementById('resetFilters').addEventListener('click', resetFilters);
+
+            document.getElementById('accountType').addEventListener('change', (e) => applyAccountGating(e.target.value));
+            const parentToggle = document.getElementById('parentToggle');
+            if (parentToggle) {
+                parentToggle.addEventListener('change', () => applyAccountGating(currentAccountType));
+            }
+
+            document.querySelectorAll('.anchor-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const id = link.getAttribute('href')?.replace('#', '');
+                    if (!id) return;
+                    const el = document.getElementById(id);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+
+            document.getElementById('itemType').addEventListener('change', function(e) {
+                const conditionGroup = document.getElementById('conditionGroup');
+                conditionGroup.style.display = e.target.value === 'digital' ? 'none' : 'block';
+            });
+
+            document.getElementById('createListingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                setLoading(submitBtn, true);
+                setTimeout(() => {
+                    alert('Listing created! (Prototype only)');
+                    setLoading(submitBtn, false);
+                    closeModal('createListingModal');
+                }, 900);
+            });
+
+            document.addEventListener('keydown', handleGlobalKeydown);
+
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeModal(modal.id);
+                    }
+                });
+            });
+        }
+
+        function renderListings() {
+            const grid = document.getElementById('listingsGrid');
+            
+            if (filteredListings.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="icon">🔍</div>
+                        <h3>No items found</h3>
+                        <p>Try adjusting your filters</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredListings.map(listing => {
+                const gradient = modeGradients[listing.mode] || modeGradients.default;
+                const bgImage = listing.imageSrc ? `${gradient}, url('${listing.imageSrc}')` : gradient;
+                const delivery = deliveryLabels[listing.delivery] || listing.delivery;
+                const conditionLabel = listing.type === 'digital' ? 'Digital' : capitalize(listing.condition);
+
+                return `
+                <div class="listing-card" data-mode="${listing.mode}" onclick="showListingDetail(${listing.id})">
+                    <div class="quick-actions">
+                        <span class="quick-action" onclick="event.stopPropagation(); handleQuickAction('save', ${listing.id});">❤️ Save</span>
+                        <span class="quick-action" onclick="event.stopPropagation(); showListingDetail(${listing.id});">👁 View</span>
+                        <span class="quick-action" onclick="event.stopPropagation(); openOffer(${listing.id});">⚡ Offer</span>
+                    </div>
+                    <div class="listing-image" style="background-image:${bgImage};">
+                        <span class="listing-emoji">${listing.image}</span>
+                    </div>
+                    <span class="listing-badge badge-${listing.mode}">${capitalize(listing.mode)}</span>
+                    <div class="listing-content">
+                        <h3 class="listing-title">${listing.title}</h3>
+                        <p class="listing-description">${listing.description}</p>
+                        <div class="chips">
+                            <span class="chip">${listing.type === 'digital' ? 'Digital' : 'Physical'}</span>
+                            <span class="chip delivery">${delivery}</span>
+                        </div>
+                        <div class="listing-meta">
+                            <span class="listing-location">📍 ${capitalize(listing.location)}</span>
+                            <span class="listing-condition">${conditionLabel}</span>
+                        </div>
+                        <div class="user-trust">
+                            <span class="trust-stars">⭐ ${listing.trustScore}</span>
+                            <span class="trust-count">(${listing.trades} trades)</span>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function applyFilters() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            const type = document.getElementById('typeFilter').value;
+            const location = document.getElementById('locationFilter').value;
+            const condition = document.getElementById('conditionFilter').value;
+
+            filteredListings = listings.filter(listing => {
+                const matchesSearch = !search || 
+                    listing.title.toLowerCase().includes(search) || 
+                    listing.description.toLowerCase().includes(search);
+                const matchesCategory = category === 'all' || listing.category === category;
+                const matchesType = type === 'all' || listing.type === type;
+                const matchesLocation = location === 'all' || listing.location === location;
+                const matchesCondition = condition === 'all' || listing.condition === condition;
+                const matchesMode = activeMode === 'all' || listing.mode === activeMode;
+
+                return matchesSearch && matchesCategory && matchesType && matchesLocation && matchesCondition && matchesMode;
+            });
+
+            renderListings();
+            renderActiveChips();
+        }
+
+        function renderActiveChips() {
+            const chips = [];
+            const category = document.getElementById('categoryFilter').value;
+            const type = document.getElementById('typeFilter').value;
+            const location = document.getElementById('locationFilter').value;
+            const condition = document.getElementById('conditionFilter').value;
+            const search = document.getElementById('searchInput').value.trim();
+
+            if (activeMode !== 'all') chips.push({ label: capitalize(activeMode), action: () => filterByMode('all') });
+            if (category !== 'all') chips.push({ label: capitalize(category), action: () => { document.getElementById('categoryFilter').value = 'all'; applyFilters(); }});
+            if (type !== 'all') chips.push({ label: capitalize(type), action: () => { document.getElementById('typeFilter').value = 'all'; applyFilters(); }});
+            if (location !== 'all') chips.push({ label: capitalize(location), action: () => { document.getElementById('locationFilter').value = 'all'; applyFilters(); }});
+            if (condition !== 'all') chips.push({ label: capitalize(condition), action: () => { document.getElementById('conditionFilter').value = 'all'; applyFilters(); }});
+            if (search) chips.push({ label: `Search: ${search}`, action: () => { document.getElementById('searchInput').value = ''; applyFilters(); }});
+
+            const chipsContainer = document.getElementById('activeChips');
+            if (chips.length === 0) {
+                chipsContainer.innerHTML = '<span style="color: var(--text-light); font-weight:600;">No active filters</span>';
+                return;
+            }
+
+            chipsContainer.innerHTML = chips.map((chip, index) => `
+                <span class="active-chip" data-chip="${index}">
+                    ${chip.label}
+                    <button aria-label="Remove filter ${chip.label}" data-chip="${index}">×</button>
+                </span>
+            `).join('');
+
+            chipsContainer.querySelectorAll('button').forEach(btn => {
+                const chip = chips[Number(btn.dataset.chip)];
+                if (chip) {
+                    btn.addEventListener('click', () => {
+                        chip.action();
+                    });
+                }
+            });
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categoryFilter').value = 'all';
+            document.getElementById('typeFilter').value = 'all';
+            document.getElementById('locationFilter').value = 'all';
+            document.getElementById('conditionFilter').value = 'all';
+            filterByMode('all');
+            applyFilters();
+        }
+
+        function filterByMode(mode) {
+            activeMode = mode;
+            updateModeButtons();
+            applyFilters();
+        }
+
+        function updateModeButtons() {
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === activeMode);
+            });
+        }
+
+        function showListingDetail(id) {
+            const listing = listings.find(l => l.id === id);
+            if (!listing) return;
+            currentListing = listing;
+
+            const title = document.getElementById('detailTitle');
+            const body = document.getElementById('detailBody');
+
+            title.textContent = listing.title;
+
+            const detailsPanel = `
+                <div class="tab-panel active" data-tab="details">
+                    <div class="detail-visual" style="background-image:${listing.imageSrc ? `${modeGradients[listing.mode] || modeGradients.default}, url('${listing.imageSrc}')` : modeGradients[listing.mode] || modeGradients.default};">
+                        <span class="listing-emoji">${listing.image}</span>
+                    </div>
+                    <div class="chips" style="margin-bottom: 1rem;">
+                        <span class="chip">${listing.type === 'digital' ? 'Digital' : 'Physical'}</span>
+                        <span class="chip delivery">${deliveryLabels[listing.delivery] || listing.delivery}</span>
+                        <span class="chip">${capitalize(listing.category)}</span>
+                    </div>
+                    <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">${listing.description}</p>
+                    <div style="background: var(--bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1rem;">
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                            <div>
+                                <div style="color: var(--text-light); font-size: 0.85rem;">Location</div>
+                                <div style="font-weight: 700;">📍 ${capitalize(listing.location)}</div>
+                            </div>
+                            <div>
+                                <div style="color: var(--text-light); font-size: 0.85rem;">Condition</div>
+                                <div style="font-weight: 700;">${listing.type === 'digital' ? 'Digital' : capitalize(listing.condition)}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const safetyPanel = `
+                <div class="tab-panel" data-tab="safety">
+                    <div class="safety-warning">
+                        <div class="safety-warning-title">🛡 Safety checklist</div>
+                        <div class="safety-warning-text">
+                            <ul style="padding-left: 1rem; margin: 0.5rem 0;">
+                                <li>No personal info in chat</li>
+                                <li>Meet in safe public places</li>
+                                <li>Double-confirm before handing over</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="trust-panel" style="margin-top:1rem;">
+                        <h3 style="margin-bottom:0.75rem;">About the ${listing.mode === 'gift' ? 'Giver' : 'Trader'}</h3>
+                        <div style="display:flex; justify-content: space-between; align-items:center;">
+                            <div>
+                                <div class="trust-stars" style="font-size: 1.5rem;">⭐ ${listing.trustScore}</div>
+                                <div style="color: var(--text-light); font-size: 0.9rem;">${listing.trades} completed trades</div>
+                            </div>
+                            <div class="badges">
+                                ${listing.badges.map(badge => `<span class="badge">${badge}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const reviewsPanel = `
+                <div class="tab-panel" data-tab="reviews">
+                    <p style="color: var(--text-light);">Reviews coming soon. In a full build, verified reviews and parent notes would show here.</p>
+                </div>
+            `;
+
+            body.innerHTML = `
+                <div class="modal-tabs">
+                    <button class="modal-tab active" data-tab="details">Details</button>
+                    <button class="modal-tab" data-tab="safety">Safety</button>
+                    <button class="modal-tab" data-tab="reviews">Reviews</button>
+                </div>
+                ${detailsPanel}
+                ${safetyPanel}
+                ${reviewsPanel}
+                <div class="safety-warning" style="margin-top:1rem;">
+                    <div class="safety-warning-title">${listing.mode === 'gift' ? '🎁 Gift flow' : '🤝 Trade smart'}</div>
+                    <div class="safety-warning-text">${listing.mode === 'gift'
+                        ? 'This is a gift. Be polite, arrange pickup or postage safely, and always involve an adult when needed.'
+                        : 'Only proceed when both sides agree. Keep chat in-app and report anything that feels off.'}</div>
+                </div>
+                <button class="btn ${listing.mode === 'gift' ? 'btn-success' : 'btn-primary'} btn-block" id="detailOfferBtn">${listing.mode === 'gift' ? 'Request this gift' : 'Make an offer'}</button>
+                <div id="detailApprovalBadge" class="active-chip" style="display:none; justify-content:center; margin-top:0.75rem;">Parent approval required</div>
+                <button class="btn btn-outline btn-block" style="margin-top: 0.75rem;">Send Message</button>
+                <div style="margin-top: 1rem; text-align: center;">
+                    <button style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 0.9rem;">
+                        🚩 Report this listing
+                    </button>
+                </div>
+            `;
+
+            body.querySelectorAll('.modal-tab').forEach(tab => {
+                tab.addEventListener('click', () => switchTab(tab.dataset.tab, body));
+            });
+
+            body.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.style.display = panel.dataset.tab === 'details' ? 'block' : 'none';
+            });
+
+            const detailBtn = document.getElementById('detailOfferBtn');
+            detailBtn.addEventListener('click', () => {
+                renderOfferModalContent(listing);
+                openModal('offerModal');
+                closeModal('listingDetailModal');
+            });
+
+            updateParentApprovalBadgeDisplays();
+            openModal('listingDetailModal');
+        }
+
+        function switchTab(tab, container) {
+            container.querySelectorAll('.modal-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tab));
+            container.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.style.display = panel.dataset.tab === tab ? 'block' : 'none';
+            });
+        }
+
+        function renderOfferModalContent(listing) {
+            currentListing = listing;
+            const body = document.getElementById('offerBody');
+            const mode = listing.mode;
+
+            let modeContent = '';
+
+            if (mode === 'gift') {
+                modeContent = `
+                    <div class="form-group">
+                        <label>Pickup or Postage?</label>
+                        <select id="offerDelivery">
+                            <option value="pickup">Pickup (safe public place)</option>
+                            <option value="postage">Postage (I’ll cover or discuss)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea id="offerMessage">Hi! I'd love to request this gift. Happy to ${listing.delivery === 'postage' ? 'pay postage' : 'collect from a safe place'}.</textarea>
+                    </div>
+                `;
+            } else if (mode === 'swap') {
+                modeContent = `
+                    <div class="form-group">
+                        <label>Choose what you’ll swap</label>
+                        <select id="swapSelect">
+                            <option>Vintage Comic Books (Swap)</option>
+                            <option>Board Game Collection (Swap)</option>
+                            <option>LEGO Minis (Swap)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Why it’s a fair swap?</label>
+                        <textarea id="offerMessage" placeholder="Share why this swap is fair.">I can swap my LEGO set which is similar value.</textarea>
+                    </div>
+                `;
+            } else {
+                modeContent = `
+                    <div class="form-group">
+                        <label>Offer points</label>
+                        <input type="range" id="tradePoints" min="10" max="200" value="80" oninput="document.getElementById('pointsValue').innerText = this.value">
+                        <div style="margin-top:0.35rem; font-weight:700;">Points: <span id="pointsValue">80</span></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Optional add-on item</label>
+                        <input id="tradeAddon" type="text" placeholder="e.g. add a digital skin or small item">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea id="offerMessage" placeholder="Why this trade is fair?">Offering 80 points + optional add-on above.</textarea>
+                    </div>
+                `;
+            }
+
+            body.innerHTML = `
+                <div class="safety-warning">
+                    <div class="safety-warning-title">⚠️ Before You Offer</div>
+                    <div class="safety-warning-text">
+                        Both parties must agree. Keep all chats here, no personal info, and meet safely.
+                    </div>
+                </div>
+                ${modeContent}
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label style="display:block; margin-bottom:0.35rem;">Safety promises</label>
+                    <label style="display:block; margin-bottom:0.25rem;"><input type="checkbox" id="safeCheckbox1"> I agree not to share personal info</label>
+                    <label style="display:block;"><input type="checkbox" id="safeCheckbox2"> I will only meet in a safe public place (with adult if needed)</label>
+                </div>
+                <button class="btn btn-success btn-block" id="submitOfferBtn">${mode === 'gift' ? 'Request gift' : mode === 'swap' ? 'Send swap offer' : 'Send trade offer'}</button>
+                <div id="parentApprovalBadge" class="active-chip" style="display:none; justify-content:center; margin-top:0.75rem;">Parent approval required</div>
+            `;
+
+            document.getElementById('submitOfferBtn').addEventListener('click', () => submitOffer(mode));
+            updateParentApprovalBadgeDisplays();
+        }
+
+        function submitOffer(mode) {
+            if (!document.getElementById('safeCheckbox1').checked || !document.getElementById('safeCheckbox2').checked) {
+                alert('Please confirm both safety checkboxes.');
+                return;
+            }
+            const btn = document.getElementById('submitOfferBtn');
+            setLoading(btn, true);
+            setTimeout(() => {
+                alert(`${mode === 'gift' ? 'Gift request sent!' : 'Offer sent!'}`);
+                setLoading(btn, false);
+                closeModal('offerModal');
+            }, 900);
+        }
+
+        function openOffer(id) {
+            const listing = listings.find(l => l.id === id);
+            if (!listing) return;
+            renderOfferModalContent(listing);
+            openModal('offerModal');
+        }
+
+        function handleQuickAction(action) {
+            const messages = {
+                save: 'Saved to favorites (prototype).',
+                view: 'Opening details...',
+                offer: 'Opening offer modal...'
+            };
+            console.log(messages[action] || 'Action');
+        }
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            modal.classList.add('active');
+            modal.setAttribute('aria-modal', 'true');
+            modal.setAttribute('role', 'dialog');
+            activeModal = modal;
+            document.body.style.overflow = 'hidden';
+
+            const focusable = modal.querySelectorAll(focusableSelectors);
+            if (focusable.length) {
+                focusable[0].focus();
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            modal.classList.remove('active');
+            modal.removeAttribute('aria-modal');
+            modal.removeAttribute('role');
+            if (activeModal && activeModal.id === modalId) {
+                activeModal = null;
+            }
+            document.body.style.overflow = '';
+        }
+
+        function handleGlobalKeydown(e) {
+            if (activeModal) {
+                if (e.key === 'Escape') {
+                    closeModal(activeModal.id);
+                }
+                if (e.key === 'Tab') {
+                    const focusable = activeModal.querySelectorAll(focusableSelectors);
+                    if (!focusable.length) return;
+                    const first = focusable[0];
+                    const last = focusable[focusable.length - 1];
+                    if (e.shiftKey && document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    } else if (!e.shiftKey && document.activeElement === last) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
+            }
+        }
+
+        function showSection(section, evt) {
+            const targetSection = section || evt?.currentTarget?.dataset.section;
+            if (!targetSection) return;
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.section === targetSection);
+            });
+            if (evt) evt.preventDefault();
+        }
+
+        function capitalize(str) {
+            if (!str) return '';
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function applyAccountGating(type) {
+            currentAccountType = type;
+            const messageBox = document.getElementById('messageBox');
+            const quickBanner = document.getElementById('quickOnlyBanner');
+            const approvalsPanel = document.getElementById('approvalsPanel');
+            const parentToggleGroup = document.getElementById('parentToggleGroup');
+            const parentToggle = document.getElementById('parentToggle');
+            const messageInputGroup = document.getElementById('messageInputGroup');
+            const messageApprovalBadge = document.getElementById('messageApprovalBadge');
+
+            const isKid = type === 'kid';
+            const allowFreeText = !isKid || (parentToggle && parentToggle.checked);
+
+            if (parentToggleGroup) {
+                parentToggleGroup.style.display = isKid ? 'block' : 'none';
+            }
+            if (!isKid && parentToggle) {
+                parentToggle.checked = false;
+            }
+
+            if (messageBox && messageInputGroup && quickBanner) {
+                if (isKid && !allowFreeText) {
+                    messageBox.disabled = true;
+                    messageInputGroup.style.display = 'none';
+                    quickBanner.style.display = 'block';
+                    messageBox.placeholder = "Quick messages only for kid accounts";
+                } else {
+                    messageBox.disabled = false;
+                    messageInputGroup.style.display = 'block';
+                    quickBanner.style.display = (isKid && !allowFreeText) ? 'block' : 'none';
+                    messageBox.placeholder = "Or type your message (no personal info!)...";
+                }
+            }
+
+            if (approvalsPanel) {
+                approvalsPanel.style.display = type === 'parent' ? 'block' : 'none';
+            }
+
+            if (messageApprovalBadge) {
+                messageApprovalBadge.style.display = (isKid && !allowFreeText) ? 'inline-flex' : 'none';
+            }
+
+            updateParentApprovalBadgeDisplays();
+        }
+
+        function updateParentApprovalBadgeDisplays() {
+            const needsApproval = currentAccountType === 'kid';
+            const badge = document.getElementById('parentApprovalBadge');
+            const detailBadge = document.getElementById('detailApprovalBadge');
+            const messageBadge = document.getElementById('messageApprovalBadge');
+            if (badge) badge.style.display = needsApproval ? 'inline-flex' : 'none';
+            if (detailBadge) detailBadge.style.display = needsApproval ? 'inline-flex' : 'none';
+            if (messageBadge) messageBadge.style.display = needsApproval ? 'inline-flex' : 'none';
+        }
+
+        function setLoading(btn, isLoading) {
+            if (!btn) return;
+            if (isLoading) {
+                btn.classList.add('loading');
+            } else {
+                btn.classList.remove('loading');
+            }
+        }
+    </script>
+</body>
+</html>
